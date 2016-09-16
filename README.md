@@ -47,7 +47,7 @@ Handlebars blocks can provide default content if desired, however optional as sh
 	</body>
 	</html>
 
-Now to extend the layout, simply create a new file and use the `extends` helper as shown below, giving the name of the partial layout. You may now define one or more blocks that will override the parent block content, note that here the `foot` block is _not_ redefined and will output “some footer content”.
+Now to extend the layout, simply create a new file and use the `extends` helper as shown below, giving the path ([server only][4]). You may now define one or more blocks that will override the parent block content, note that here the `foot` block is _not_ redefined and will output “some footer content”.
 
 	{{! page-a.hbs }}
 	
@@ -156,6 +156,21 @@ The `append` and `prepend` helpers make this common use case even easier.
 	
 	{{/extends}}
 
+## Todo
+
+In chronological order (oldest first); not in order of priority.
+
+* remove server-only restriction and add support for running in the browser (client-side)
+* investigate possibility of using partial blocks in addition to the extends helper
+* please create an issue if you'd like any of these changes or to recommend other changes
+
+## Changelog
+
+_1.0.0 — September 16, 2016_
+
+* initial version
+* requires node.js fs and path modules to load layouts from file system
+
 ## License
 
 handlebars-template-inheritance is available under the [MIT License][3].
@@ -163,3 +178,4 @@ handlebars-template-inheritance is available under the [MIT License][3].
 [1]: https://pugjs.org/language/inheritance.html
 [2]: http://handlebarsjs.com
 [3]: https://github.com/keithws/handlebars-template-inheritance/blob/master/LICENSE
+[4]: https://github.com/keithws/handlebars-template-inheritance#Todo
