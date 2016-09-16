@@ -1,5 +1,5 @@
 # handlebars-template-inheritance
-Add support to Handlebars for template inheritance with the `block` and `extends` block helpers. This process is recursive.
+Add support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
 Directly inspired by [Template Inheritance][1] in Pug and this works exactly the same way but in Handlebars.
 
@@ -18,6 +18,7 @@ Note: You can have multiple levels of inheritance, allowing you to create powerf
 Handlebars blocks can provide default content if desired, however optional as shown below by `block scripts`, `block content`, and `block foot`.
 
 	{{! layout.hbs }}
+	
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
@@ -49,6 +50,7 @@ Handlebars blocks can provide default content if desired, however optional as sh
 Now to extend the layout, simply create a new file and use the `extends` helper as shown below, giving the name of the partial layout. You may now define one or more blocks that will override the parent block content, note that here the `foot` block is _not_ redefined and will output “some footer content”.
 
 	{{! page-a.hbs }}
+	
 	{{#extends "layout"}}
 	
 		{{#block "scripts"}}
@@ -70,6 +72,7 @@ Now to extend the layout, simply create a new file and use the `extends` helper 
 It’s also possible to override a block to provide additional blocks, as shown in the following example where the `content` block now exposes a `sidebar` and `primary` block for overriding, or the child template could override the `content` block all together.
 
 	{{! sub-layout.hbs }}
+	
 	{{#extends "layout"}}
 	
 		{{#block "content"}}
@@ -88,6 +91,7 @@ It’s also possible to override a block to provide additional blocks, as shown 
 	{{/extends}}
 
 	{{! page-b.hbs }}
+	
 	{{#extends "sub-layout"}}
 	
 		{{#block "content"}}
@@ -105,11 +109,12 @@ It’s also possible to override a block to provide additional blocks, as shown 
 	
 	{{/extends}}
 
-### Append / Prepend Blocks
+### Block Append / Prepend
 
 The `block` helper also allows you to prepend or append blocks in addition to the default behavior of replacing blocks. Suppose for example you have default scripts in a `head` block that you wish to utilize on every page, you might do this:
 
 	{{! layout.hbs }}
+	
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
@@ -128,6 +133,7 @@ The `block` helper also allows you to prepend or append blocks in addition to th
 	</html>
 
 	{{! page.hbs }}
+	
 	{{#extends "layout"}}
 	
 		{{#block "head" mode="append"}}
@@ -140,6 +146,7 @@ The `block` helper also allows you to prepend or append blocks in addition to th
 The `append` and `prepend` helpers make this common use case even easier.
 
 	{{! page.hbs }}
+	
 	{{#extends "layout"}}
 	
 		{{#append "head"}}
