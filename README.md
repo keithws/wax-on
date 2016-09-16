@@ -15,7 +15,7 @@ npm install handlebars-template-inheritance --save
 // app.js
 
 const Handlebars = require("handlebars");
-const helpers = require("handlebars-template-inheritance");
+const helpers = require("handlebars-template-inheritance")("/path/to/layouts");
 
 Handlebars.registerHelper(helpers);
 ```

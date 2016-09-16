@@ -5,7 +5,7 @@ const path = require("path");
 const Handlebars = require("handlebars");
 
 var blocks = {};
-
+var layoutPath = "";
 
 /**
  * extends helper for Handlebars
@@ -23,7 +23,7 @@ function extendsHelper (name, options) {
         name = "default";
     }
 
-    file = path.resolve(this.site.path.layouts, `${name}.hbs`);
+    file = path.resolve(layoutPath, `${name}.hbs`);
     fs.accessSync(file, fs.constants.R_OK);
     contents = fs.readFileSync(file, { "encoding": "utf8" });
 
@@ -151,10 +151,15 @@ function blockPrependHelper (name, options) {
 
 }
 
+module.exports = function initializeHelpers (path) {
 
-module.exports = {
-    "extends": extendsHelper,
-    "block": blockHelper,
-    "append": blockAppendHelper,
-    "prepend": blockPrependHelper
+    layoutPath = path;
+
+    return {
+        "extends": extendsHelper,
+        "block": blockHelper,
+        "append": blockAppendHelper,
+        "prepend": blockPrependHelper
+    };
+
 };
