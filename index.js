@@ -1,0 +1,160 @@
+"use strict";
+
+const fs = require("fs");
+const path = require("path");
+const Handlebars = require("handlebars");
+
+var blocks = {};
+
+
+/**
+ * extends helper for Handlebars
+ *
+ * @param name {String} the file name of the template to extend
+ * @param options {Object} the options hash
+ * @return {String} the template output
+ */
+function extendsHelper (name, options) {
+
+    let contents, file, template;
+
+    if (!options) {
+        options = name;
+        name = "default";
+    }
+
+    file = path.resolve(this.site.path.layouts, `${name}.hbs`);
+    fs.accessSync(file, fs.constants.R_OK);
+    contents = fs.readFileSync(file, { "encoding": "utf8" });
+
+    this.layout = `${name}.hbs`;
+    options.fn(this);
+    delete this.layout;
+
+    template = Handlebars.compile(contents);
+    if (options.data) {
+        let data = Handlebars.createFrame(options.data);
+        data.layout = {
+            "filename": `${name}.hbs`
+        };
+        options.data = data;
+    }
+    return template(this, { "data": options.data });
+
+}
+
+
+/**
+ * block helper for Handlebars
+ *
+ * @param name {String} the name of the block
+ * @param options {Object} the options hash
+ * @return {String} the template output
+ */
+function blockHelper (name, options) {
+
+    var block, blockContent, contents, stack;
+
+    if (!options) {
+        options = name;
+        name = null;
+        throw "Missing required argument: name";
+    }
+
+    // check for parent block name
+    if (options.data.parentBlockName) {
+
+        name = options.data.parentBlockName + "/" + name;
+
+    }
+
+    // store block name for later
+    options.data.parentBlockName = name;
+
+    // get existing stack for named block
+    stack = blocks[name] || [];
+
+    // stack up the blocks so we can execute them in order later
+    stack.push({
+        "fn": options.fn,
+        "context": this,
+        "data": Handlebars.createFrame(options.data),
+        "hash": options.hash
+    });
+
+    blocks[name] = stack;
+
+    if (!this.layout) {
+
+        // ok, it's later; empty the stack and execute those blocks!
+        blockContent = "";
+        while (stack.length) {
+
+            block = stack.pop();
+            contents = block.fn(block.context, { "data": block.data });
+
+            switch (block.hash.mode) {
+            case "append":
+                blockContent = blockContent + contents;
+                break;
+            case "prepend":
+                blockContent = contents + blockContent;
+                break;
+            default:
+            case "replace":
+                blockContent = contents;
+                break;
+            }
+
+        }
+
+        // remove the block
+        delete blocks[name];
+
+    }
+
+    // trim parent block name
+    let blockNameAncestory = options.data.parentBlockName.split("/");
+    options.data.parentBlockName = blockNameAncestory.slice(0,-1).join("/");
+
+    return blockContent;
+
+}
+
+
+/**
+ * append (block) helper for Handlebars
+ *
+ * @param name {String} the name of the block
+ * @param options {Object} the options hash
+ * @return {String} the template output block content appended
+ */
+function blockAppendHelper (name, options) {
+
+    options.hash.mode = "append";
+    return blockHelper(name, options);
+
+}
+
+
+/**
+ * prepend (block) helper for Handlebars
+ *
+ * @param name {String} the name of the block
+ * @param options {Object} the options hash
+ * @return {String} the template output block content prepended
+ */
+function blockPrependHelper (name, options) {
+
+    options.hash.mode = "prepend";
+    return blockHelper(name, options);
+
+}
+
+
+module.exports = {
+    "extends": extendsHelper,
+    "block": blockHelper,
+    "append": blockAppendHelper,
+    "prepend": blockPrependHelper
+};
