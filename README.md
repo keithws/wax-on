@@ -1,7 +1,7 @@
 # handlebars-template-inheritance
 Add support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
-Directly inspired by [Template Inheritance in Pug][1] and this works exactly the same way but in [Handlebars][2].
+Directly inspired by [template Inheritance in Pug][1] and this works exactly the same way but in [Handlebars][2].
 
 ## Install
 
@@ -205,4 +205,4 @@ handlebars-template-inheritance is available under the [MIT License][3].
 [1]: https://pugjs.org/language/inheritance.html
 [2]: http://handlebarsjs.com
 [3]: https://github.com/keithws/handlebars-template-inheritance/blob/master/LICENSE
-[4]: https://github.com/keithws/handlebars-template-inheritance#Todo
+[4]: https://github.com/keithws/handlebars-template-inheritance#todo
