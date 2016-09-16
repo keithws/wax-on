@@ -1,0 +1,29 @@
+{
+  "name": "handlebars-template-inheritance",
+  "version": "1.0.0",
+  "description": "Add support to Handlebars for template inheritance with the `block` and `extends` block helpers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keithws/handlebars-template-inheritance.git"
+  },
+  "keywords": [
+    "handlebars",
+    "layout",
+    "composable",
+    "template",
+    "dynamic",
+    "block",
+    "extends",
+    "inheritance"
+  ],
+  "author": "Keith W. Shaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keithws/handlebars-template-inheritance/issues"
+  },
+  "homepage": "https://github.com/keithws/handlebars-template-inheritance#readme"
+}
