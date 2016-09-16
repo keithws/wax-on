@@ -5,7 +5,9 @@ Directly inspired by [Template Inheritance in Pug][1] and this works exactly the
 
 ## Install
 
-	npm install handlebars-template-inheritance --save
+```shell
+npm install handlebars-template-inheritance --save
+```
 
 ## Usage
 
