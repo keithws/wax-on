@@ -3,17 +3,17 @@ Add support to Handlebars for template inheritance with the `block` and `extends
 
 Directly inspired by [Template Inheritance][1] in Pug and this works exactly the same way but in Handlebars.
 
-## Install
+## Usage
 
 	npm install --save handlebars-template-inheritance
 
-## Extends
+### Extends
 
 The `extends` helper allows a template to extend a layout or parent template. It can then override certain pre-defined blocks of content.
 
 Note: You can have multiple levels of inheritance, allowing you to create powerful hierarchies of templates.
 
-## Block
+### Block
 
 Handlebars blocks can provide default content if desired, however optional as shown below by `block scripts`, `block content`, and `block foot`.
 
@@ -105,7 +105,7 @@ It’s also possible to override a block to provide additional blocks, as shown 
 	
 	{{/extends}}
 
-### Block Append / Prepend
+### Append / Prepend Blocks
 
 The `block` helper also allows you to prepend or append blocks in addition to the default behavior of replacing blocks. Suppose for example you have default scripts in a `head` block that you wish to utilize on every page, you might do this:
 
@@ -149,5 +149,9 @@ The `append` and `prepend` helpers make this common use case even easier.
 	
 	{{/extends}}
 
+## License
+
+handlebars-template-inheritance is available under the [MIT License][2].
 
 [1]: https://pugjs.org/language/inheritance.html
+[2]: https://github.com/keithws/handlebars-template-inheritance/blob/master/LICENSE
