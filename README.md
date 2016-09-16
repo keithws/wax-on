@@ -150,4 +150,4 @@ The `append` and `prepend` helpers make this common use case even easier.
 	{{/extends}}
 
 
-	[1]: https://pugjs.org/language/inheritance.html
+[1]: https://pugjs.org/language/inheritance.html
