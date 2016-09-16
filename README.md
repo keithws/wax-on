@@ -3,9 +3,18 @@ Add support to Handlebars for template inheritance with the `block` and `extends
 
 Directly inspired by [Template Inheritance in Pug][1] and this works exactly the same way but in [Handlebars][2].
 
+## Install
+
+	npm install handlebars-template-inheritance --save
+
 ## Usage
 
-	npm install --save handlebars-template-inheritance
+	// app.js
+	
+	import Handlebars from 'handlebars';
+	import helpers from 'handlebars-template-inheritance';
+	
+	Handlebars.registerHelper(helpers);
 
 ### Extends
 
