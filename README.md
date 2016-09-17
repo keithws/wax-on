@@ -1,5 +1,5 @@
-# WaxOn
-WaxOn adds support to Handlebars for template inheritance with the `block` and `extends` helpers.
+# Wax On
+Wax On adds support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
 Directly inspired by [template Inheritance in Pug][1] and works exactly the same but in [Handlebars][2].
 
@@ -201,7 +201,7 @@ _1.0.0 — September 16, 2016_
 
 ## License
 
-WaxOn is available under the [MIT License][3].
+Wax On is available under the [MIT License][3].
 
 [1]: https://pugjs.org/language/inheritance.html
 [2]: http://handlebarsjs.com
