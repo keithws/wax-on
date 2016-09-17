@@ -10,9 +10,9 @@ var layoutPath = "";
 /**
  * extends helper for Handlebars
  *
- * @param name {String} the file name of the template to extend
- * @param options {Object} the options hash
- * @return {String} the template output
+ * @arg name {String} the file name of the template to extend
+ * @arg options {Object} the options hash
+ * @returns {String} the template output
  */
 function extendsHelper (name, options) {
 
@@ -47,9 +47,9 @@ function extendsHelper (name, options) {
 /**
  * block helper for Handlebars
  *
- * @param name {String} the name of the block
- * @param options {Object} the options hash
- * @return {String} the template output
+ * @arg name {String} the name of the block
+ * @arg options {Object} the options hash
+ * @returns {String} the template output
  */
 function blockHelper (name, options) {
 
@@ -125,9 +125,9 @@ function blockHelper (name, options) {
 /**
  * append (block) helper for Handlebars
  *
- * @param name {String} the name of the block
- * @param options {Object} the options hash
- * @return {String} the template output block content appended
+ * @arg name {String} the name of the block
+ * @arg options {Object} the options hash
+ * @returns {String} the template output block content appended
  */
 function blockAppendHelper (name, options) {
 
@@ -140,9 +140,9 @@ function blockAppendHelper (name, options) {
 /**
  * prepend (block) helper for Handlebars
  *
- * @param name {String} the name of the block
- * @param options {Object} the options hash
- * @return {String} the template output block content prepended
+ * @arg name {String} the name of the block
+ * @arg options {Object} the options hash
+ * @returns {String} the template output block content prepended
  */
 function blockPrependHelper (name, options) {
 
