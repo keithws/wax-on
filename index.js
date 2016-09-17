@@ -151,15 +151,44 @@ function blockPrependHelper (name, options) {
 
 }
 
-module.exports = function initializeHelpers (path) {
+
+/**
+ * setLayoutPath - set the path where to find layout files
+ * TODO check if path exists and is readable
+ *
+ * @arg path {String} the path to the layout files
+ * @returns {undefined}
+ */
+function setLayoutPath (path) {
 
     layoutPath = path;
+
+}
+
+
+/**
+ * getHelpers - return just the helper functions
+ *
+ * @returns {Object} the helpers
+ */
+function getHelpers () {
 
     return {
         "extends": extendsHelper,
         "block": blockHelper,
         "append": blockAppendHelper,
-        "prepend": blockPrependHelper
+        "prepend": blockPrependHelper,
+    };
+
+}
+
+module.exports = function initializeHelpers (path) {
+
+    path && setLayoutPath(path);
+
+    return {
+        "setLayoutPath": setLayoutPath,
+        "getHelpers": getHelpers
     };
 
 };

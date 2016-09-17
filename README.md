@@ -1,12 +1,12 @@
-# handlebars-template-inheritance
-Add support to Handlebars for template inheritance with the `block` and `extends` helpers.
+# WaxOn
+WaxOn adds support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
-Directly inspired by [template Inheritance in Pug][1] and this works exactly the same way but in [Handlebars][2].
+Directly inspired by [template Inheritance in Pug][1] and works exactly the same but in [Handlebars][2].
 
 ## Install
 
 ```shell
-npm install handlebars-template-inheritance --save
+npm install wax-on --save
 ```
 
 ## Usage
@@ -15,9 +15,10 @@ npm install handlebars-template-inheritance --save
 // app.js
 
 const Handlebars = require("handlebars");
-const helpers = require("handlebars-template-inheritance")("/path/to/layouts");
+const wax = require("wax-on");
 
-Handlebars.registerHelper(helpers);
+wax.setLayoutPath("/path/to/layouts");
+Handlebars.registerHelper(wax.getHelpers());
 ```
 
 ### Extends
@@ -187,7 +188,7 @@ The `append` and `prepend` helpers make this common use case even easier.
 
 In chronological order (oldest first); not in order of priority.
 
-* remove server-only restriction and add support for running in the browser (client-side)
+* add support for running in the browser (client-side)
 * investigate possibility of using partial blocks in addition to the extends helper
 * please create an issue if you'd like any of these changes or to recommend other changes
 
@@ -196,13 +197,13 @@ In chronological order (oldest first); not in order of priority.
 _1.0.0 — September 16, 2016_
 
 * initial version
-* requires node.js fs and path modules to load layouts from file system
+* requires node.js fs and path modules to load layouts from the file system
 
 ## License
 
-handlebars-template-inheritance is available under the [MIT License][3].
+WaxOn is available under the [MIT License][3].
 
 [1]: https://pugjs.org/language/inheritance.html
 [2]: http://handlebarsjs.com
-[3]: https://github.com/keithws/handlebars-template-inheritance/blob/master/LICENSE
-[4]: https://github.com/keithws/handlebars-template-inheritance#todo
+[3]: https://github.com/keithws/wax-on/blob/master/LICENSE
+[4]: https://github.com/keithws/wax-on#todo
