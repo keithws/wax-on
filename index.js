@@ -2,10 +2,12 @@
 
 const fs = require("fs");
 const path = require("path");
-const Handlebars = require("handlebars");
 
-var blocks = {};
-var layoutPath = "";
+var blocks, Handlebars, layoutPath;
+
+blocks = {};
+layoutPath = "";
+
 
 /**
  * extends helper for Handlebars
@@ -169,7 +171,7 @@ function setLayoutPath (path) {
 /**
  * getHelpers - return just the helper functions
  *
- * @returns {Object} the helpers
+ * @returns {Object} the Handlebars helper functions
  */
 function getHelpers () {
 
@@ -182,13 +184,14 @@ function getHelpers () {
 
 }
 
-module.exports = function initializeHelpers (path) {
+function registerHelpersWith (handlebars) {
 
-    path && setLayoutPath(path);
+    Handlebars = handlebars || require("handlebars");
+    Handlebars.registerHelper(getHelpers());
 
-    return {
-        "setLayoutPath": setLayoutPath,
-        "getHelpers": getHelpers
-    };
+}
 
+module.exports = {
+    "on": registerHelpersWith,
+    "setLayoutPath": setLayoutPath
 };

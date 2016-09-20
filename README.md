@@ -17,8 +17,9 @@ npm install wax-on --save
 const Handlebars = require("handlebars");
 const wax = require("wax-on");
 
+// register Wax On helpers with Handlebars
+wax.on(Handlebars);
 wax.setLayoutPath("/path/to/layouts");
-Handlebars.registerHelper(wax.getHelpers());
 ```
 
 ### Extends

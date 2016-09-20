@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/keithws/wax-on/issues"
   },
-  "homepage": "https://github.com/keithws/wax-on#readme"
+  "homepage": "https://github.com/keithws/wax-on#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
 }
