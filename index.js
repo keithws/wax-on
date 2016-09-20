@@ -132,7 +132,7 @@ function blockHelper (name, options) {
 function blockAppendHelper (name, options) {
 
     options.hash.mode = "append";
-    return blockHelper(name, options);
+    return blockHelper.apply(this, arguments);
 
 }
 
@@ -147,7 +147,7 @@ function blockAppendHelper (name, options) {
 function blockPrependHelper (name, options) {
 
     options.hash.mode = "prepend";
-    return blockHelper(name, options);
+    return blockHelper.apply(this, arguments);
 
 }
 
