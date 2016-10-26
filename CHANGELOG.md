@@ -1,5 +1,11 @@
 ## Change Log
 
+_1.0.3 — October 26, 2016_
+
+* added travis-ci build instructions
+* added npm, travis-ci, and david-dm badges to the readme
+
+
 _1.0.2 — October 26, 2016_
 
 * moved change log from README to a new file

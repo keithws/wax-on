@@ -1,4 +1,7 @@
 # Wax On
+
+[![npm](https://img.shields.io/npm/v/wax-on.svg)](https://www.npmjs.com/package/wax-on)[![Travis](https://img.shields.io/travis/keithws/wax-on.svg)](https://travis-ci.org/keithws/wax-on)[![David](https://img.shields.io/david/keithws/wax-on.svg)](https://david-dm.org/keithws/wax-on)
+
 Wax On adds support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
 Directly inspired by [template Inheritance in Pug][1] and works the same way in [Handlebars][2].
