@@ -194,17 +194,7 @@ In chronological order (most recent first); not in order of priority. Please cre
 
 ## Change Log
 
-_1.0.1 — September 16, 2016_
-
-* added tests for the four common use cases outlined in the Pug docs
-* make it possible to override a block to provide additional blocks
-* make it possible to redefine a block from a parent template
-
-
-_1.0.0 — September 16, 2016_
-
-* initial version
-* requires node.js File System and Path modules to load layouts from the file system
+The Wax On change log can be found in the [CHANGELOG.md][5] file within the project.
 
 ## License
 
@@ -214,3 +204,4 @@ Wax On is available under the [MIT License][3].
 [2]: http://handlebarsjs.com
 [3]: https://github.com/keithws/wax-on/blob/master/LICENSE
 [4]: https://github.com/keithws/wax-on#todo
+[5]: https://github.com/keithws/wax-on/blob/master/CHANGELOG.md
