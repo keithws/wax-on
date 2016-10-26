@@ -1,12 +1,12 @@
 # Wax On
 Wax On adds support to Handlebars for template inheritance with the `block` and `extends` helpers.
 
-Directly inspired by [template Inheritance in Pug][1] and works exactly the same but in [Handlebars][2].
+Directly inspired by [template Inheritance in Pug][1] and works the same way in [Handlebars][2].
 
 ## Install
 
 ```shell
-npm install wax-on --save
+npm install --save wax-on
 ```
 
 ## Usage
