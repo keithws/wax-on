@@ -187,18 +187,24 @@ The `append` and `prepend` helpers make this common use case even easier.
 
 ## Todo
 
-In chronological order (oldest first); not in order of priority.
+In chronological order (most recent first); not in order of priority. Please create an issue if you'd like any of these changes or to recommend other changes.
 
 * add support for running in the browser (client-side)
 * investigate possibility of using partial blocks in addition to the extends helper
-* please create an issue if you'd like any of these changes or to recommend other changes
 
-## Changelog
+## Change Log
+
+_1.0.1 — September 16, 2016_
+
+* added tests for the four common use cases outlined in the Pug docs
+* make it possible to override a block to provide additional blocks
+* make it possible to redefine a block from a parent template
+
 
 _1.0.0 — September 16, 2016_
 
 * initial version
-* requires node.js fs and path modules to load layouts from the file system
+* requires node.js File System and Path modules to load layouts from the file system
 
 ## License
 

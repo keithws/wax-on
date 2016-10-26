@@ -66,12 +66,12 @@ function blockHelper (name, options) {
     // check for parent block name
     if (options.data.parentBlockName) {
 
-        name = options.data.parentBlockName + "/" + name;
+        // name = options.data.parentBlockName + "/" + name;
 
     }
 
     // store block name for later
-    options.data.parentBlockName = name;
+    //options.data.parentBlockName = name;
 
     // get existing stack for named block
     stack = blocks[name] || [];
@@ -116,10 +116,10 @@ function blockHelper (name, options) {
     }
 
     // trim parent block name
-    let blockNameAncestory = options.data.parentBlockName.split("/");
-    options.data.parentBlockName = blockNameAncestory.slice(0,-1).join("/");
+    //let blockNameAncestory = options.data.parentBlockName.split("/");
+    //options.data.parentBlockName = blockNameAncestory.slice(0,-1).join("/");
 
-    return blockContent;
+    return new Handlebars.SafeString(blockContent);
 
 }
 
