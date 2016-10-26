@@ -1,0 +1,14 @@
+{{#extends "append/prepend/layout"}}
+
+{{#append "head"}}
+    <script src="/vendor/three.js"></script>
+    <script src="/game.js"></script>
+{{/append}}
+
+{{#prepend "foot"}}
+    <p>
+        some pre-footer content
+    </p>
+{{/prepend}}
+
+{{/extends}}

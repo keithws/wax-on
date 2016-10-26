@@ -1,0 +1,19 @@
+{{#extends "layout"}}
+
+{{#block "scripts"}}
+    <script src="/jquery.js"></script>
+    <script src="/pets.js"></script>
+{{/block}}
+
+{{#block "content"}}
+    <h1>
+        {{title}}
+    </h1>
+    {{#each pets}}
+        <p>
+            {{this}}
+        </p>
+    {{/each}}
+{{/block}}
+
+{{/extends}}
