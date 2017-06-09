@@ -1,12 +1,13 @@
 "use strict";
 
-const fs = require("fs");
+const fs = require("graceful-fs");
 const path = require("path");
 
-var blocks, Handlebars, layoutPath;
+var blocks, Handlebars, layoutPath, cache;
 
 blocks = {};
 layoutPath = "";
+cache = new Map();
 
 
 /**
@@ -26,8 +27,18 @@ function extendsHelper (name, options) {
     }
 
     file = path.resolve(layoutPath, `${name}.hbs`);
-    fs.accessSync(file, fs.constants.R_OK);
-    contents = fs.readFileSync(file, { "encoding": "utf8" });
+    if (process.env.NODE_ENV === "production") {
+        if (cache.has(file)) {
+            contents = cache.get(file);
+        } else {
+            fs.accessSync(file, fs.constants.R_OK);
+            contents = fs.readFileSync(file, { "encoding": "utf8" });
+            cache.set(file, contents);
+        }
+    } else {
+        fs.accessSync(file, fs.constants.R_OK);
+        contents = fs.readFileSync(file, { "encoding": "utf8" });
+    }
 
     this.layout = `${name}.hbs`;
     options.fn(this);

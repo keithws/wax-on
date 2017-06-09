@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/keithws/wax-on#readme",
   "dependencies": {
+    "graceful-fs": "^4.1.11",
     "handlebars": "^4.0.5"
   },
   "devDependencies": {
