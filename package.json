@@ -1,6 +1,6 @@
 {
   "name": "wax-on",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Add support to Handlebars for template inheritance with the `block` and `extends` helpers.",
   "main": "index.js",
   "scripts": {

@@ -1,5 +1,10 @@
 ## Change Log
 
+_1.1.0 — June 9, 2017_
+
+* added cache for reading layout files specified in the {{#extends}} helper when run in a production environment
+* added the graceful-fs module to prevent EMFILE errors
+
 _1.0.3 — October 26, 2016_
 
 * added travis-ci build instructions
