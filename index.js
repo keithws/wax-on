@@ -190,7 +190,7 @@ function getHelpers () {
         "extends": extendsHelper,
         "block": blockHelper,
         "append": blockAppendHelper,
-        "prepend": blockPrependHelper,
+        "prepend": blockPrependHelper
     };
 
 }
