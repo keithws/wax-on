@@ -11,6 +11,32 @@ cache = new Map();
 
 
 /**
+ * helper function to read layout file, set cache, and return file contents
+ */
+function cacheSet (name) {
+
+    let contents, duration, file;
+
+    if (process.env.NODE_ENV === "production") {
+        duration = parseFloat(process.env.WAXON_CACHE) || 86400; // one day
+    } else {
+        duration = parseFloat(process.env.WAXON_CACHE) || 60; // one minute
+    }
+
+    file = path.resolve(layoutPath, `${name}.hbs`);
+    fs.accessSync(file, fs.constants.R_OK);
+    contents = fs.readFileSync(file, { "encoding": "utf8" });
+    cache.set(name, {
+        until: Date.now() + duration * 1000,
+        contents: contents
+    });
+
+    return contents;
+
+}
+
+
+/**
  * extends helper for Handlebars
  *
  * @arg name {String} the file name of the template to extend
@@ -19,25 +45,22 @@ cache = new Map();
  */
 function extendsHelper (name, options) {
 
-    let contents, file, template;
+    let contents, template;
 
     if (!options) {
         options = name;
         name = "default";
     }
 
-    file = path.resolve(layoutPath, `${name}.hbs`);
-    if (process.env.NODE_ENV === "production") {
-        if (cache.has(file)) {
-            contents = cache.get(file);
+    if (cache.has(name)) {
+        let obj = cache.get(name);
+        if (obj.until > Date.now()) {
+            contents = obj.contents;
         } else {
-            fs.accessSync(file, fs.constants.R_OK);
-            contents = fs.readFileSync(file, { "encoding": "utf8" });
-            cache.set(file, contents);
+            contents = cacheSet(name);
         }
     } else {
-        fs.accessSync(file, fs.constants.R_OK);
-        contents = fs.readFileSync(file, { "encoding": "utf8" });
+        contents = cacheSet(name);
     }
 
     this.layout = `${name}.hbs`;
