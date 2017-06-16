@@ -1,5 +1,12 @@
 ## Change Log
 
+_1.2.0 — June 15, 2017_
+
+* the cache that was added in 1.1.0 is now used all the time
+	* the contents of the layout files are cache in memory for up to one day when `NODE_ENV=production`
+	* otherwise, the contents are cached for one minute
+	* the duration for which the contents are cached in memory can be changed with the `WAXON_CACHE` environment variable. it is set in seconds.
+
 _1.1.0 — June 9, 2017_
 
 * added cache for reading layout files specified in the {{#extends}} helper when run in a production environment
