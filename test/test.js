@@ -7,26 +7,8 @@ const Handlebars = require("handlebars");
 const wax = require("..");
 const fs = require("fs");
 const path = require("path");
-const cheerio = require("cheerio");
 
 const testFiles = path.resolve(__dirname, "files");
-
-/**
- * assertEqualHTML - helper function to compare HTML strings
- * @arg {String} 
- * @arg {String}
- * @returns {boolean}
- */
-function assertEqualHTML (actual, expected) {
-
-    let a, b;
-
-    a = cheerio.load(actual, { "normalizeWhitespace": true }).html();
-    b = cheerio.load(expected, { "normalizeWhitespace": true }).html();
-
-    return assert.equal(a, b);
-
-}
 
 describe("Wax On", function () {
 
@@ -86,7 +68,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
@@ -117,7 +99,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
@@ -142,7 +124,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
@@ -167,7 +149,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
@@ -192,7 +174,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
@@ -217,7 +199,7 @@ describe("Wax On", function () {
 
                     let actual = html;
                     let expected = data;
-                    assertEqualHTML(actual, expected);
+                    assert.equal(actual, expected);
                     done();
 
                 });
