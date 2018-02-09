@@ -1,5 +1,14 @@
 ## Change Log
 
+_1.2.1 — Febrary 8, 2018_
+
+* updated dependancies
+	* updated handlerbars from 4.0.5 to 4.0.11
+* updated dev dependancies
+	* updated mocha from 3.x to 5.x
+	* refactored tests to not require cheerio
+	* removed cheerio
+
 _1.2.0 — June 15, 2017_
 
 * the cache that was added in 1.1.0 is now used all the time
