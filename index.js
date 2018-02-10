@@ -13,7 +13,7 @@ cache = new Map();
 /**
  * helper function to read layout file, set cache, and return file contents
  */
-function cacheSet (name) {
+function cacheSet (filename) {
 
     let contents, duration, file;
 
@@ -23,10 +23,10 @@ function cacheSet (name) {
         duration = parseFloat(process.env.WAXON_CACHE) || 60; // one minute
     }
 
-    file = path.resolve(layoutPath, `${name}.hbs`);
+    file = path.resolve(layoutPath, filename);
     fs.accessSync(file, fs.constants.R_OK);
     contents = fs.readFileSync(file, { "encoding": "utf8" });
-    cache.set(name, {
+    cache.set(filename, {
         until: Date.now() + duration * 1000,
         contents: contents
     });
@@ -45,25 +45,29 @@ function cacheSet (name) {
  */
 function extendsHelper (name, options) {
 
-    let contents, template;
+    let contents, template, filename;
 
     if (!options) {
         options = name;
         name = "default";
+        filename = `${name}.hbs`;
+    } else {
+        filename = `${name}.${options.hash.extension || "hbs"}`;
     }
 
-    if (cache.has(name)) {
-        let obj = cache.get(name);
+
+    if (cache.has(filename)) {
+        let obj = cache.get(filename);
         if (obj.until > Date.now()) {
             contents = obj.contents;
         } else {
-            contents = cacheSet(name);
+            contents = cacheSet(filename);
         }
     } else {
-        contents = cacheSet(name);
+        contents = cacheSet(filename);
     }
 
-    this.layout = `${name}.hbs`;
+    this.layout = filename;
     options.fn(this);
     delete this.layout;
 
@@ -71,7 +75,7 @@ function extendsHelper (name, options) {
     if (options.data) {
         let data = Handlebars.createFrame(options.data);
         data.layout = {
-            "filename": `${name}.hbs`
+            "filename": filename
         };
         options.data = data;
     }

@@ -1,5 +1,8 @@
 ## Change Log
 
+_1.2.2 — October 4, 2018_
+* enabled "extension" attribute in the {{#extends}} to support the customization of extension name
+
 _1.2.1 — Febrary 8, 2018_
 
 * updated dependancies
