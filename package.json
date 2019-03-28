@@ -11,16 +11,16 @@
     "url": "git+https://github.com/keithws/wax-on.git"
   },
   "keywords": [
-    "waxon",
-    "handlebars",
-    "layout",
-    "composable",
-    "template",
-    "dynamic",
     "block",
+    "composable",
+    "dynamic",
     "extends",
+    "handlebars",
     "inheritance",
-    "wax"
+    "layout",
+    "template",
+    "wax",
+    "waxon"
   ],
   "author": "Keith W. Shaw",
   "license": "MIT",
