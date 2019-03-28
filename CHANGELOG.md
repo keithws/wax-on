@@ -1,6 +1,11 @@
 ## Change Log
 
-_1.2.1 — Febrary 8, 2018_
+_1.2.2 — March 28, 2019_
+
+* changed default cache time from 60 seconds to zero for non-production use
+* updated dependancies
+
+_1.2.1 — February 8, 2018_
 
 * updated dependancies
 	* updated handlerbars from 4.0.5 to 4.0.11
