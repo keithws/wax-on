@@ -20,16 +20,18 @@ function cacheSet (name) {
     if (process.env.NODE_ENV === "production") {
         duration = parseFloat(process.env.WAXON_CACHE) || 86400; // one day
     } else {
-        duration = parseFloat(process.env.WAXON_CACHE) || 60; // one minute
+        duration = parseFloat(process.env.WAXON_CACHE) || 0; // zero
     }
 
     file = path.resolve(layoutPath, `${name}.hbs`);
     fs.accessSync(file, fs.constants.R_OK);
     contents = fs.readFileSync(file, { "encoding": "utf8" });
-    cache.set(name, {
-        until: Date.now() + duration * 1000,
-        contents: contents
-    });
+    if (duration > 0) {
+        cache.set(name, {
+            until: Date.now() + duration * 1000,
+            contents: contents
+        });
+    }
 
     return contents;
 
