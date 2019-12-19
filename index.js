@@ -14,15 +14,15 @@ cache = new Map();
  * helper function to read layout file, set cache, and return file contents
  */
 function cacheSet (name) {
-    
+
     let contents, duration, file;
-    
+
     if (process.env.NODE_ENV === "production") {
         duration = parseFloat(process.env.WAXON_CACHE) || 86400; // one day
     } else {
         duration = parseFloat(process.env.WAXON_CACHE) || 0; // zero
     }
-    
+
     file = path.resolve(layoutPath, `${name}.hbs`);
     fs.accessSync(file, fs.constants.R_OK);
     contents = fs.readFileSync(file, { "encoding": "utf8" });
@@ -32,9 +32,9 @@ function cacheSet (name) {
             contents: contents
         });
     }
-    
+
     return contents;
-    
+
 }
 
 
@@ -46,14 +46,14 @@ function cacheSet (name) {
  * @returns {String} the template output
  */
 function extendsHelper (name, options) {
-    
+
     let contents, template;
-    
+
     if (!options) {
         options = name;
         name = "default";
     }
-    
+
     if (cache.has(name)) {
         let obj = cache.get(name);
         if (obj.until > Date.now()) {
@@ -64,11 +64,11 @@ function extendsHelper (name, options) {
     } else {
         contents = cacheSet(name);
     }
-    
+
     this.layout = `${name}.hbs`;
     options.fn(this);
     delete this.layout;
-    
+
     template = Handlebars.compile(contents);
     if (options.data) {
         let data = Handlebars.createFrame(options.data);
@@ -78,7 +78,7 @@ function extendsHelper (name, options) {
         options.data = data;
     }
     return template(this, { "data": options.data });
-    
+
 }
 
 
@@ -90,29 +90,29 @@ function extendsHelper (name, options) {
  * @returns {String} the template output
  */
 function blockHelper (name, options) {
-    
+
     var block, blockContent, contents, stack;
-    
+
     if (!options) {
         options = name;
         name = null;
         throw "Missing required argument: name";
     }
-    
+
     // check for parent block name
     if (options.data.parentBlockName) {
-        
+
         // name = options.data.parentBlockName + "/" + name;
-        
+
     }
-    
+
     // store block name for later
     //options.data.parentBlockName = name;
-    
+
     // get existing stack for named block
     stack = blocks[name] || [];
     var oldStack = [].concat(stack);
-    
+
     // stack up the blocks so we can execute them in order later
     stack.push({
         "fn": options.fn,
@@ -120,48 +120,47 @@ function blockHelper (name, options) {
         "data": Handlebars.createFrame(options.data),
         "hash": options.hash
     });
-    
+
     blocks[name] = stack;
-    
+
     if (!this.layout) {
-        
+
         // ok, it's later; empty the stack and execute those blocks!
         blockContent = "";
         while (stack.length) {
-            
+
             block = stack.pop();
             contents = block.fn(block.context, { "data": block.data });
-            
+
             switch (block.hash.mode) {
-                case "append":
-                    blockContent = blockContent + contents;
-                    break;
-                case "prepend":
-                    blockContent = contents + blockContent;
-                    break;
-                default:
-                case "replace":
-                    blockContent = contents;
-                    break;
+            case "append":
+                blockContent = blockContent + contents;
+                break;
+            case "prepend":
+                blockContent = contents + blockContent;
+                break;
+            default:
+            case "replace":
+                blockContent = contents;
+                break;
             }
-            
+
         }
     
-        if (oldStack.length === 0) {
-            // remove the block
+        if (oldStack.length === 0 || options.data.last) {
+            // remove the block if block is not inherited, or there is no loop or there is a loop which was finished
             delete blocks[name];
         } else {
-            blocks[name] = oldStack;
+             blocks[name] = oldStack;
         }
-        
     }
-    
+
     // trim parent block name
     //let blockNameAncestory = options.data.parentBlockName.split("/");
     //options.data.parentBlockName = blockNameAncestory.slice(0,-1).join("/");
-    
+
     return new Handlebars.SafeString(blockContent);
-    
+
 }
 
 
@@ -173,10 +172,10 @@ function blockHelper (name, options) {
  * @returns {String} the template output block content appended
  */
 function blockAppendHelper (name, options) {
-    
+
     options.hash.mode = "append";
     return blockHelper.apply(this, arguments);
-    
+
 }
 
 
@@ -188,10 +187,10 @@ function blockAppendHelper (name, options) {
  * @returns {String} the template output block content prepended
  */
 function blockPrependHelper (name, options) {
-    
+
     options.hash.mode = "prepend";
     return blockHelper.apply(this, arguments);
-    
+
 }
 
 
@@ -203,9 +202,9 @@ function blockPrependHelper (name, options) {
  * @returns {undefined}
  */
 function setLayoutPath (path) {
-    
+
     layoutPath = path;
-    
+
 }
 
 
@@ -215,21 +214,21 @@ function setLayoutPath (path) {
  * @returns {Object} the Handlebars helper functions
  */
 function getHelpers () {
-    
+
     return {
         "extends": extendsHelper,
         "block": blockHelper,
         "append": blockAppendHelper,
         "prepend": blockPrependHelper
     };
-    
+
 }
 
 function registerHelpersWith (handlebars) {
-    
+
     Handlebars = handlebars || require("handlebars");
     Handlebars.registerHelper(getHelpers());
-    
+
 }
 
 module.exports = {
